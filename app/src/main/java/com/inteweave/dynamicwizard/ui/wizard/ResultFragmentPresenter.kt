@@ -20,31 +20,35 @@ class ResultFragmentPresenter(
      */
     data class ScreenContents(
         val identifier: String,
-        val description: String
+        val description: String,
+        val imageUrl: String
     ) : Parcelable {
         /**
          * Construct from a parcel
          */
         constructor(parcel: Parcel) : this(
             parcel.readString()!!,
+            parcel.readString()!!,
             parcel.readString()!!
         )
 
         /**
          * Construct the contents from the map in the JSON file.
-         * This template expects the map to have keys **description**, **button1** and **button2**
+         * This template expects the map to have keys **description**, **image**
          *
          * @param contents the map of the screen contents
          */
         constructor(contents: Map<String, String>) :
                 this(
                     contents["id"] ?: "",
-                    contents["description"] ?: "Not defined in JSON"
+                    contents["description"] ?: "Not defined in JSON",
+                    contents["image"] ?: ""
                 )
 
         override fun writeToParcel(parcel: Parcel, flags: Int) {
             parcel.writeString(identifier)
             parcel.writeString(description)
+            parcel.writeString(imageUrl)
         }
 
         override fun describeContents(): Int {

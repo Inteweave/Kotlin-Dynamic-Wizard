@@ -16,6 +16,11 @@ import com.inteweave.dynamicwizard.wizard.Wizard
  */
 class SnacksViewModel(application: Application) : AndroidViewModel(application) {
 
+    /**
+     * The wizard is loaded in a coroutine from the JSON file in the assets
+     *
+     * It could just as easily be loaded from a web service or CMS store
+     */
     val wizard: LiveData<Wizard<String, String>> = liveData {
         val json = application.assets.open("snacks.json").bufferedReader().use { it.readText() }
         val wizardModel = Gson().fromJson(json, WizardModel::class.java)

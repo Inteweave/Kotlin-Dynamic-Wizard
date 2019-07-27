@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_two_button.*
 private const val ARG_SCREEN = "screen"
 
 /**
- * Template Fragment to show a snacks screen
+ * Template Fragment to show a snacks screen with 2 buttons
  *
  * @author W M Milward
  * Copyright © 2019 Inteweave. All rights reserved.

@@ -21,9 +21,9 @@
     <Button android:id="@+id/button1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/standard_margin"
             android:layout_marginTop="@dimen/standard_margin"
             tools:text="Button1"
+            app:layout_constraintEnd_toStartOf="@id/button2"
             app:layout_constraintTop_toBottomOf="@id/label"
             app:layout_constraintStart_toStartOf="parent"/>
 
@@ -31,9 +31,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/standard_margin"
-            android:layout_marginTop="@dimen/standard_margin"
-            tools:text="Button1"
-            app:layout_constraintTop_toBottomOf="@id/button1"
-            app:layout_constraintStart_toStartOf="parent"/>
+            tools:text="Button2"
+            app:layout_constraintTop_toTopOf="@id/button1"
+            app:layout_constraintStart_toEndOf="@id/button1"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.inteweave.dynamicwizard.R
 import kotlinx.android.synthetic.main.fragment_result.*
 import kotlinx.android.synthetic.main.fragment_two_button.label
@@ -43,6 +44,7 @@ class ResultFragment : Fragment() {
         presenter?.let {
             with(it) {
                 label.text = screenContents.description
+                Glide.with(imageView.context).load(screenContents.imageUrl).into(imageView)
             }
         }
     }

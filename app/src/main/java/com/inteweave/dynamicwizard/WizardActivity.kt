@@ -22,25 +22,31 @@ class WizardActivity : AppCompatActivity(),
     EventListener,
     HomeFragment.Listener {
 
+    override var isEnabled: Boolean
+        get() = wizard != null
+        set(_) {}
+
     private lateinit var model: SnacksViewModel
     private var wizard: Wizard<String, String>? = null
+    private var homeFragment: HomeFragment? = null
 
     /**
      * Create or attach the the view model and instantiate the home fragment
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.wizard_host_activity)
+        setContentView(R.layout.wizard_activity)
         model = ViewModelProviders.of(this)[SnacksViewModel::class.java]
         if (savedInstanceState == null) {
+            homeFragment = HomeFragment.newInstance()
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, HomeFragment.newInstance())
+                .replace(R.id.container, homeFragment!!)
                 .commitNow()
         }
 
         model.wizard.observe(this, Observer<Wizard<String, String>> {
             wizard = it
-            // enable button
+            homeFragment?.isEnabled = true
         })
     }
 
@@ -70,6 +76,7 @@ class WizardActivity : AppCompatActivity(),
      * to indicate forward or back navigation.
      */
     private fun showScreen(fragment: Fragment?) {
+        homeFragment = null
         fragment?.let {
             supportFragmentManager.beginTransaction().setCustomAnimations(
                 R.anim.slide_in_right,

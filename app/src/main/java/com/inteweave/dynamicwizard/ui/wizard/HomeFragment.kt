@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.inteweave.dynamicwizard.R
-import kotlinx.android.synthetic.main.wizard_host_fragment.*
+import kotlinx.android.synthetic.main.home_fragment.*
 
 /**
  * Very simple fragment to start the wizard
@@ -17,13 +17,27 @@ import kotlinx.android.synthetic.main.wizard_host_fragment.*
  */
 class HomeFragment : Fragment() {
 
+    /**
+     * Pretty standard pattern for a fragment interaction listener;
+     * set in onAttach and cleared in onDetach
+     */
     interface Listener {
         fun onStartWizard()
+        var isEnabled: Boolean
     }
+
+    var isEnabled: Boolean
+        get() = startWizard.isEnabled
+        set(value) {
+            startWizard.isEnabled = value
+        }
 
     private var listener: Listener? = null
 
     companion object {
+        /**
+         * Factory method to create an instance of this fragment
+         */
         fun newInstance() = HomeFragment()
     }
 
@@ -32,7 +46,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.wizard_host_fragment, container, false)
+        return inflater.inflate(R.layout.home_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,8 +54,15 @@ class HomeFragment : Fragment() {
         startWizard.setOnClickListener {
             listener?.onStartWizard()
         }
+
+        if (savedInstanceState == null) {
+            startWizard.isEnabled = listener?.isEnabled ?: false
+        }
     }
 
+    /**
+     * Get a reference to the fragment interaction listener
+     */
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is Listener) {
@@ -51,6 +72,9 @@ class HomeFragment : Fragment() {
         }
     }
 
+    /**
+     * Clear the reference to the fragment interaction listener
+     */
     override fun onDetach() {
         super.onDetach()
         listener = null
