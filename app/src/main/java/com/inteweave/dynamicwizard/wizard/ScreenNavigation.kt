@@ -1,5 +1,7 @@
 package com.inteweave.dynamicwizard.wizard
 
+import kotlinx.serialization.Serializable
+
 /**
  * This is the actual navigation
  * There is one of these created for each possible event for each screen
@@ -15,6 +17,7 @@ package com.inteweave.dynamicwizard.wizard
  * @author W M Milward
  * Copyright © 2019 Inteweave. All rights reserved.
  */
+@Serializable
 data class ScreenNavigation<ScreenIdentifier, WizardEvent>(
     val onScreen: ScreenIdentifier,
     val event: WizardEvent,

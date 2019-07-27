@@ -4,9 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
-import com.google.gson.Gson
 import com.inteweave.dynamicwizard.json.wizard.model.WizardModel
 import com.inteweave.dynamicwizard.wizard.Wizard
+import kotlinx.serialization.json.JSON
 
 /**
  * The view model contains the definition of the wizard
@@ -23,7 +23,7 @@ class SnacksViewModel(application: Application) : AndroidViewModel(application) 
      */
     val wizard: LiveData<Wizard<String, String>> = liveData {
         val json = application.assets.open("snacks.json").bufferedReader().use { it.readText() }
-        val wizardModel = Gson().fromJson(json, WizardModel::class.java)
+        val wizardModel = JSON().parse(WizardModel.serializer(), json)
         val screenMap = HashMap<String, Map<String, String>>()
         for (screen in wizardModel.screens) {
             screenMap[screen["id"] ?: ""] = screen
