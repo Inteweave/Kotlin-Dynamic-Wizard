@@ -1,0 +1,54 @@
+{
+	"start": "select snack",
+	"screens": [
+		{
+			"id": "select snack",
+			"template": "two-button",
+			"description": "Select snack",
+			"button1": "Ice Cream",
+			"button2": "Nuts"
+		},
+		{
+			"id": "ice cream",
+			"template": "two-button",
+            "description": "Select Ice Cream Serve",
+			"button1": "Scoop",
+			"button2": "Soft Serve"
+		},
+		{
+			"id": "cone",
+			"template": "result",
+			"description": "Ice Cream Scoop Selected"
+		},
+		{
+			"id": "soft serve",
+			"template": "two-button",
+			"description": "Select Topping",
+			"button1": "Choc Dip",
+			"button2": "Sprinkles"
+		},
+		{
+			"id": "choc dip",
+			"template": "result",
+			"description": "Choc Dip Soft Serve"
+		},
+		{
+			"id": "sprinkles",
+			"template": "result",
+			"description": "Soft Serve with Sprinkles"
+		},
+		{
+			"id": "nuts",
+			"template": "result",
+			"description": "Salted Mixed Nuts"
+		}
+	],
+	"navigation": [
+		{ "onScreen": "select snack", "event": "button1", "navigateTo": "ice cream" },
+		{ "onScreen": "select snack", "event": "button2", "navigateTo": "nuts" },
+		{ "onScreen": "ice cream", "event": "button1", "navigateTo": "cone" },
+		{ "onScreen": "ice cream", "event": "button2", "navigateTo": "soft serve" },
+		{ "onScreen": "soft serve", "event": "button1", "navigateTo": "choc dip" },
+		{ "onScreen": "soft serve", "event": "button2", "navigateTo": "sprinkles" }
+	]
+}
